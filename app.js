@@ -30,10 +30,8 @@ const joinValues = () => {
       submission.push(0);
     }
   })
-  console.log(submission);
 }
 const populateVals = (arr) => {
-  console.log(arr);
   inputs.forEach((input, i) => {
     input.value = arr.answer[i];
   })
@@ -46,9 +44,13 @@ const changeTextColor = () => {
     }
   })
 }
+const handleError = (err) => {
+  alert("No possible solution - " + err);
+}
 const solve = () => {
   joinValues();
   changeTextColor();
+
   const options = {
     method: 'POST',
     headers: {
@@ -62,13 +64,13 @@ const solve = () => {
   fetch('https://sudoku-solver3.p.rapidapi.com/sudokusolver/', options)
     .then(response => response.json())
     .then(response => populateVals(response))
-    .catch(err => console.error(err));
+    .catch(err => handleError(err));
 }
 
 const clear = () => {
   inputs.forEach(input => {
     input.value = "";
-    classList.remove("highlight-text");
+    input.classList.remove("highlight-text");
   })
 }
 
