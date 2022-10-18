@@ -7,6 +7,14 @@
   border: 1px grey solid;
   box-sizing: border-box;
   border-spacing: 0;
+  font-size: 1.5em;
   height: 50px;
   width: 50px;
+}
+.grey {
+  background-color: lightgray;
+}
+.highlight-text {
+  font-weight: bold;
+  color: rgb(0, 133, 242);
 }
