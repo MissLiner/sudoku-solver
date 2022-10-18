@@ -1,3 +1,12 @@
+* {
+  margin: auto;
+  text-align: center;
+}
+
+h1 {
+  color:rgb(0, 133, 242)
+}
+
 #puzzle {
   height: 450px;
   width: 450px;
