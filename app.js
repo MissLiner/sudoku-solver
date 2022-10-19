@@ -1,3 +1,5 @@
+
+
 const board = document.getElementById("puzzle");
 const solveButton = document.getElementById("solve-button");
 const clearButton = document.getElementById("clear-button");
@@ -47,24 +49,28 @@ const changeTextColor = () => {
 const handleError = (err) => {
   alert("No possible solution - " + err);
 }
+
 const solve = () => {
   joinValues();
+  console.log(submission)
   changeTextColor();
 
   const options = {
     method: 'POST',
+    url: 'https://sudoku-solver3.p.rapidapi.com/sudokusolver/',
     headers: {
-      'content-type': 'application/json',
+      'Content-Type': 'application/json',
       'X-RapidAPI-Key': '8e8cd9e0b5msh8013e732caa4f9bp19fb4djsn8c14c3d63a1e',
       'X-RapidAPI-Host': 'sudoku-solver3.p.rapidapi.com'
     },
-    body: JSON.stringify({"input": submission})
+    data: JSON.stringify({'input': submission}),
   };
-
-  fetch('https://sudoku-solver3.p.rapidapi.com/sudokusolver/', options)
-    .then(response => response.json())
-    .then(response => populateVals(response))
-    .catch(err => handleError(err));
+  
+  axios.request(options).then(function (response) {
+    populateVals(response.data);
+  }).catch(function (error) {
+    console.error(error);
+  });
 }
 
 const clear = () => {
