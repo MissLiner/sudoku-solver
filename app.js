@@ -35,7 +35,7 @@ const joinValues = () => {
 }
 const populateVals = (arr) => {
   inputs.forEach((input, i) => {
-    input.value = arr.answer[i];
+    input.value = arr[i];
   })
 
 }
@@ -52,25 +52,24 @@ const handleError = (err) => {
 
 const solve = () => {
   joinValues();
-  console.log(submission)
   changeTextColor();
 
-  const options = {
+  fetch('http://localhost:8000/solve', {
     method: 'POST',
-    url: 'https://sudoku-solver3.p.rapidapi.com/sudokusolver/',
     headers: {
       'Content-Type': 'application/json',
-      'X-RapidAPI-Key': '8e8cd9e0b5msh8013e732caa4f9bp19fb4djsn8c14c3d63a1e',
-      'X-RapidAPI-Host': 'sudoku-solver3.p.rapidapi.com'
+      'Accept': 'application/json',
     },
-    data: JSON.stringify({'input': submission}),
-  };
-  
-  axios.request(options).then(function (response) {
-    populateVals(response.data);
-  }).catch(function (error) {
-    console.error(error);
-  });
+    body: JSON.stringify(submission),
+  })  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+    populateVals(data.answer);
+  })
+      .catch((error) => {
+        handleError(error)
+        console.log('Error:', error)
+      })
 }
 
 const clear = () => {
