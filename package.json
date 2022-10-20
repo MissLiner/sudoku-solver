@@ -15,7 +15,7 @@
     "start:backend": "nodemon server.js",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "app": "npm start --prefix app",
+    "app": "npm start app.js",
     "dev": "concurrently \"npm run server\" \"npm run app\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix app && npm run build --prefix app",
     "test": "echo \"Error: no test specified\" && exit 1"

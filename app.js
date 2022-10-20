@@ -1,5 +1,5 @@
 
-
+const PORT = process.env.PORT || 8000
 const board = document.getElementById("puzzle");
 const solveButton = document.getElementById("solve-button");
 const clearButton = document.getElementById("clear-button");
@@ -54,7 +54,7 @@ const solve = () => {
   joinValues();
   changeTextColor();
 
-  fetch('http://localhost:8000/solve', {
+  fetch(`${PORT}/solve`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

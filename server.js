@@ -7,12 +7,11 @@ require('dotenv').config()
 const app = express()
 app.use(cors())
 app.use(express.json())
+app.use('/', express.static('./index.html'))
 
 app.listen(PORT, () => console.log(`Server listening on PORT ${PORT}`))
 
 app.post('/solve', (req,res) => {
-  
-  //console.log('AAA', req.body)
   const options = {
     method: 'POST',
     url: 'https://sudoku-solver3.p.rapidapi.com/sudokusolver/',
